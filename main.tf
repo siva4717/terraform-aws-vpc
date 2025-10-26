@@ -4,9 +4,9 @@ resource "aws_vpc" "main" {
   instance_tenancy = var.instance_tenancy
 
   tags = merge(
-    locals.common_tags,
+    local.common_tags,
     {
-        Name="${locals.common_name_suffix}-vpc"
+        Name="${local.common_name_suffix}-vpc"
     }
   )
 }
