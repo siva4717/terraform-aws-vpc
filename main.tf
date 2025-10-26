@@ -28,5 +28,21 @@ resource "aws_internet_gateway" "igw" {
   )
 }
 
+# Create Public Subnets 1a and 1b 
 
+resource "aws_subnet" "public" {
+  count = length(var.public_subnet_cidrs)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.public_subnet_cidrs[count.index]
+  availability_zone = local.availability_zones[count.index]
+  map_public_ip_on_launch = true 
+
+  tags = merge(
+    var.public_subnet_tags,
+    local.common_tags,
+    {
+        Name="${local.common_name_suffix}-public-${local.availability_zones[count.index]}"
+    }
+  )
+}
 
