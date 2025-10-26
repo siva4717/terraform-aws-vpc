@@ -3,7 +3,7 @@ output "vpc_id" {
 }
 
 output "public_subnet_id" {
-  value = var.public_subnet_cidrs.id
+  value = var.public_subnet_cidrs[0].id
 }
 
 output "public_route_table_id" {
@@ -19,3 +19,4 @@ output "private_route_table_id" {
 output "database_route_table_id" {
   value = aws_route_table.database.id
 }
+
