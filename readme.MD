@@ -13,3 +13,7 @@ environment (Required) --> user must supply environment for vpc
 cidr_block (Required) --> user must supply cidr_block 
 
 vpc_tags (Optional)  --> vpc_tags are optional
+
+### Outputs
+
+vpc_id --> This resource gives vpc_id
