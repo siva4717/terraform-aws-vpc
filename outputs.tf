@@ -27,4 +27,7 @@ output "database_route_table_id" {
   value = aws_route_table.database.id
 }
 
+output "is_peering_required" {
+  value = var.is_peering_required
+}
 
