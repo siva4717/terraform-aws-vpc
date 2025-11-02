@@ -186,21 +186,21 @@ resource "aws_route" "database" {
 # create public subnet id
 resource "aws_route_table_association" "public" {
   count = length(var.public_subnet_cidrs)
-  subnet_id      = aws_subnet.public[count.index]
+  subnet_id      = aws_subnet.public[count.index[*]]
   route_table_id = aws_route_table.public.id
 }
 
 # create private subnet id
 resource "aws_route_table_association" "private" {
   count = length(var.private_subnet_cidrs)
-  subnet_id      = aws_subnet.private[count.index]
+  subnet_id      = aws_subnet.private[count.index[*]]
   route_table_id = aws_route_table.private.id
 }
 
 # create database subnet id
 resource "aws_route_table_association" "database" {
   count = length(var.database_subnet_cidrs)
-  subnet_id      = aws_subnet.database[count.index]
+  subnet_id      = aws_subnet.database[count.index[*]]
   route_table_id = aws_route_table.database.id
 }
 
