@@ -163,3 +163,49 @@ resource "aws_nat_gateway" "nat" {
   # on the Internet Gateway for the VPC.
   depends_on = [aws_internet_gateway.igw]
 }
+
+
+
+# create private egress through nat
+resource "aws_route" "private" {
+  route_table_id              = aws_route_table.private.id
+  destination_ipv6_cidr_block = "0.0.0.0/0"
+  nat_gateway_id = aws_nat_gateway.nat.id
+
+}
+
+# create database egress through nat
+resource "aws_route" "database" {
+  route_table_id              = aws_route_table.database.id
+  destination_ipv6_cidr_block = "0.0.0.0/0"
+  nat_gateway_id = aws_nat_gateway.nat.id
+
+}
+
+
+# create public subnet id
+resource "aws_route_table_association" "public" {
+  count = length(var.public_subnet_cidrs)
+  subnet_id      = aws_subnet.public[count.index]
+  route_table_id = aws_route_table.public.id
+}
+
+# create private subnet id
+resource "aws_route_table_association" "private" {
+  count = length(var.private_subnet_cidrs)
+  subnet_id      = aws_subnet.private[count.index]
+  route_table_id = aws_route_table.private.id
+}
+
+# create database subnet id
+resource "aws_route_table_association" "database" {
+  count = length(var.database_subnet_cidrs)
+  subnet_id      = aws_subnet.database[count.index]
+  route_table_id = aws_route_table.database.id
+}
+
+
+
+
+
+
