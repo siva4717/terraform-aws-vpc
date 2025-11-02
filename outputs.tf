@@ -3,7 +3,15 @@ output "vpc_id" {
 }
 
 output "public_subnet_id" {
-  value = var.public_subnet_cidrs[0].id
+  value = var.public_subnet_cidrs[*].id
+}
+
+output "private_subnet_id" {
+  value = var.private_subnet_cidrs[*].id
+}
+
+output "database_subnet_id" {
+  value = var.database_subnet_cidrs[*].id
 }
 
 output "public_route_table_id" {
