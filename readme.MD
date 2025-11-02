@@ -22,6 +22,7 @@ This module creates the following resources.
 
 * vpc_cidr - (Required). User must supply the CIDR for VPC.
 * project_name - (Required). User must supply the project nae.
+* is_peering_connection - (Optional)
 
 ### Outputs
 
