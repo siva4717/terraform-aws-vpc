@@ -196,7 +196,7 @@ resource "aws_route_table_association" "private" {
   subnet_id      = aws_subnet.private[count.index]
   route_table_id = aws_route_table.private.id
 }
-g
+
 # create database subnet id
 resource "aws_route_table_association" "database" {
   count = length(var.database_subnet_cidrs)
