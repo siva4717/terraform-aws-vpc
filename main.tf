@@ -169,7 +169,7 @@ resource "aws_nat_gateway" "nat" {
 # create private egress through nat
 resource "aws_route" "private" {
   route_table_id              = aws_route_table.private.id
-  destination_ipv6_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id = aws_nat_gateway.nat.id
 
 }
@@ -177,7 +177,7 @@ resource "aws_route" "private" {
 # create database egress through nat
 resource "aws_route" "database" {
   route_table_id              = aws_route_table.database.id
-  destination_ipv6_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id = aws_nat_gateway.nat.id
 
 }
@@ -196,7 +196,7 @@ resource "aws_route_table_association" "private" {
   subnet_id      = aws_subnet.private[count.index]
   route_table_id = aws_route_table.private.id
 }
-
+g
 # create database subnet id
 resource "aws_route_table_association" "database" {
   count = length(var.database_subnet_cidrs)
